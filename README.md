@@ -61,6 +61,8 @@ Mastodon Instance can be deployed by anyone on any servers. All Mastodon Instanc
 ### e. What architectural patterns are used?
 For a single Mastodon instance, the project is using the simpel client-server architecture. For the whole federated network, the project is actually a peer-to-peer network architecture or server-server architecture.  
 ## 4. Analyze two defects in the project
+[issue #9435](https://github.com/tootsuite/mastodon/issues/9435) mentions that once a certain threshold of HTTP 405 responses is reached (~5-10), Mastodon should remove the end-point from its list of federated end-points. HTTP response 405 means that the end-point is signaling that it's not federated - in accordance with the ActivityPub spec. The actual behaviour should be that Mastodon keeps pushing new Activities to end-points that are replying with HTTP 405 Method not Allowed responses. This issue requires adding functions in handling the HTTP 405 response.  
+[issue #7943](https://github.com/tootsuite/mastodon/issues/7943) mentions that somtimes the count of auth errors is incorrect. This is because in the code, the number of errors reported is always n+1. So this issue need to alter the logic in the code.  
 ## 5. Demo
 I successfully install my own Mastodon Instance on a AWS EC2 VM. In order to let people visit my own Mastodon instance, I set up a domain for the AWS EC2 and then people can visit this instance by url: <https://www.brefcube.com>.
 <img src="./images/website.PNG">
